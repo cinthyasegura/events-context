@@ -3,53 +3,57 @@ import { CategoriesConsumer } from '../context/CategoriesContext';
 
 export class Form extends Component {
   state = {
-    category: '',
-    name: ''
+    name: '',
+    category: ''
   };
 
   render() {
     return (
-      <Form>
+      <form>
         <fieldset className='uk-fieldset uk-margin'>
           <legend className='uk-legend uk-text-center'>
-            Busca tu evento por Nombre o Categoría
+            Find your event by Name or Category
           </legend>
         </fieldset>
-        <div className='uk-column-1-3@m uk-margin'>
+
+        <div className='uk-column-1-3@m uk-maring'>
           <div className='uk-margin' uk-margin='true'>
             <input
               name='name'
               className='uk-input'
               type='text'
-              placeholder='Nombre de Evento o Ciudad'
+              placeholder='Name of event or City'
             />
           </div>
+
           <div className='uk-margin' uk-margin='true'>
-            <CategoriesConsumer name='category' className='uk-select'>
+            <select className='uk-select' name='category'>
               <CategoriesConsumer>
                 {value => {
+                  console.log(value);
                   return value.categories.map(category => (
                     <option
                       key={category.id}
                       value={category.id}
-                      className='data-uk-form-select'
+                      data-uk-form-select
                     >
                       {category.name_localized}
                     </option>
                   ));
                 }}
               </CategoriesConsumer>
-            </CategoriesConsumer>
+            </select>
           </div>
+
           <div>
             <input
-              className='uk-button uk-button-danger'
               type='submit'
-              value='Busca eventos'
+              className='uk-button uk-button-danger'
+              value='Find Events'
             />
           </div>
         </div>
-      </Form>
+      </form>
     );
   }
 }
